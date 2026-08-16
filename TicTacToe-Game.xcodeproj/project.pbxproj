@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		47E2FEDD2F990CD0005A82FE /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 47E2FEDC2F990CD0005A82FE /* Factory */; };
+		47E2FEDF2F990CD0005A82FE /* FactoryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 47E2FEDE2F990CD0005A82FE /* FactoryKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		47E2FEC02F98F7A9005A82FE /* TicTacToe-Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TicTacToe-Game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +28,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47E2FEDF2F990CD0005A82FE /* FactoryKit in Frameworks */,
+				47E2FEDD2F990CD0005A82FE /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +72,8 @@
 			);
 			name = "TicTacToe-Game";
 			packageProductDependencies = (
+				47E2FEDC2F990CD0005A82FE /* Factory */,
+				47E2FEDE2F990CD0005A82FE /* FactoryKit */,
 			);
 			productName = "TicTacToe-Game";
 			productReference = 47E2FEC02F98F7A9005A82FE /* TicTacToe-Game.app */;
@@ -94,6 +103,9 @@
 			);
 			mainGroup = 47E2FEB72F98F7A9005A82FE;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				47E2FEDB2F990CD0005A82FE /* XCRemoteSwiftPackageReference "Factory" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 47E2FEC12F98F7A9005A82FE /* Products */;
 			projectDirPath = "";
@@ -258,6 +270,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -289,6 +302,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -328,6 +342,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		47E2FEDB2F990CD0005A82FE /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		47E2FEDC2F990CD0005A82FE /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47E2FEDB2F990CD0005A82FE /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
+		47E2FEDE2F990CD0005A82FE /* FactoryKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47E2FEDB2F990CD0005A82FE /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = FactoryKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 47E2FEB82F98F7A9005A82FE /* Project object */;
 }
