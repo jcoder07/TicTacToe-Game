@@ -34,6 +34,10 @@ final class GameSetupViewModel: ObservableObject {
     init() {
         getSetupInfo()
     }
+    
+    func startGame() {
+        appModeStore.goGameMode()
+    }
 }
 
 private extension GameSetupViewModel {
