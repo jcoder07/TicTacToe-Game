@@ -9,7 +9,11 @@ import Factory
 
 extension Container {
     var appModeStore: Factory<AppModeLiveStore> {
-        Factory(self) { AppModeLiveStore() }.singleton
+        self { MainActor.assumeIsolated { AppModeLiveStore() } }.singleton
+    }
+        
+    var gameSetupStore: Factory<GameSetupLiveStore> {
+        self { MainActor.assumeIsolated { GameSetupLiveStore() } }.singleton
     }
 }
 
