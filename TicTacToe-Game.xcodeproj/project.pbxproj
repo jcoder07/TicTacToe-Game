@@ -6,32 +6,35 @@
 	objectVersion = 77;
 	objects = {
 
-AA0000000000000000000002 = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = "TicTacToe-GameTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-AA0000000000000000000003 = {isa = PBXFileSystemSynchronizedRootGroup; path = "TicTacToe-GameTests"; sourceTree = "<group>"; };
-AA0000000000000000000004 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
-AA0000000000000000000005 = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
-AA0000000000000000000006 = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
-AA000000000000000000000B = {isa = PBXContainerItemProxy; containerPortal = 47E2FEB82F98F7A9005A82FE; proxyType = 1; remoteGlobalIDString = 47E2FEBF2F98F7A9005A82FE; remoteInfo = "TicTacToe-Game"; };
-AA000000000000000000000A = {isa = PBXTargetDependency; target = 47E2FEBF2F98F7A9005A82FE; targetProxy = AA000000000000000000000B; };
-AA0000000000000000000001 = {isa = PBXNativeTarget; buildConfigurationList = AA0000000000000000000007; buildPhases = (AA0000000000000000000004, AA0000000000000000000005, AA0000000000000000000006); buildRules = (); dependencies = (AA000000000000000000000A); fileSystemSynchronizedGroups = (AA0000000000000000000003); name = "TicTacToe-GameTests"; productName = "TicTacToe-GameTests"; productReference = AA0000000000000000000002; productType = "com.apple.product-type.bundle.unit-test"; };
-AA0000000000000000000007 = {isa = XCConfigurationList; buildConfigurations = (AA0000000000000000000008, AA0000000000000000000009); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
-AA0000000000000000000008 = {isa = XCBuildConfiguration; buildSettings = { BUNDLE_LOADER = "$(TEST_HOST)"; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TicTacToe-Game.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TicTacToe-Game"; GENERATE_INFOPLIST_FILE = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.6; PRODUCT_BUNDLE_IDENTIFIER = "com.juanfernandez.TicTacToe-GameTests"; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Debug; };
-AA0000000000000000000009 = {isa = XCBuildConfiguration; buildSettings = { BUNDLE_LOADER = "$(TEST_HOST)"; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TicTacToe-Game.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TicTacToe-Game"; GENERATE_INFOPLIST_FILE = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.6; PRODUCT_BUNDLE_IDENTIFIER = "com.juanfernandez.TicTacToe-GameTests"; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Release; };
-
-
 /* Begin PBXBuildFile section */
 		47E2FEDD2F990CD0005A82FE /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 47E2FEDC2F990CD0005A82FE /* Factory */; };
 		47E2FEDF2F990CD0005A82FE /* FactoryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 47E2FEDE2F990CD0005A82FE /* FactoryKit */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		AA000000000000000000000B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47E2FEB82F98F7A9005A82FE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 47E2FEBF2F98F7A9005A82FE;
+			remoteInfo = "TicTacToe-Game";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		47E2FEC02F98F7A9005A82FE /* TicTacToe-Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TicTacToe-Game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0000000000000000000002 /* TicTacToe-GameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = "TicTacToe-GameTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		47E2FEC22F98F7A9005A82FE /* TicTacToe-Game */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "TicTacToe-Game";
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000003 /* TicTacToe-GameTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "TicTacToe-GameTests";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -46,6 +49,13 @@ AA0000000000000000000009 = {isa = XCBuildConfiguration; buildSettings = { BUNDLE
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AA0000000000000000000005 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -53,7 +63,7 @@ AA0000000000000000000009 = {isa = XCBuildConfiguration; buildSettings = { BUNDLE
 			isa = PBXGroup;
 			children = (
 				47E2FEC22F98F7A9005A82FE /* TicTacToe-Game */,
-AA0000000000000000000003,
+				AA0000000000000000000003 /* TicTacToe-GameTests */,
 				47E2FEC12F98F7A9005A82FE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -62,7 +72,7 @@ AA0000000000000000000003,
 			isa = PBXGroup;
 			children = (
 				47E2FEC02F98F7A9005A82FE /* TicTacToe-Game.app */,
-AA0000000000000000000002,
+				AA0000000000000000000002 /* TicTacToe-GameTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -93,6 +103,27 @@ AA0000000000000000000002,
 			productName = "TicTacToe-Game";
 			productReference = 47E2FEC02F98F7A9005A82FE /* TicTacToe-Game.app */;
 			productType = "com.apple.product-type.application";
+		};
+		AA0000000000000000000001 /* TicTacToe-GameTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA0000000000000000000007 /* Build configuration list for PBXNativeTarget "TicTacToe-GameTests" */;
+			buildPhases = (
+				AA0000000000000000000004 /* Sources */,
+				AA0000000000000000000005 /* Frameworks */,
+				AA0000000000000000000006 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA000000000000000000000A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				AA0000000000000000000003 /* TicTacToe-GameTests */,
+			);
+			name = "TicTacToe-GameTests";
+			productName = "TicTacToe-GameTests";
+			productReference = AA0000000000000000000002 /* TicTacToe-GameTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -126,7 +157,7 @@ AA0000000000000000000002,
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-AA0000000000000000000001,
+				AA0000000000000000000001 /* TicTacToe-GameTests */,
 				47E2FEBF2F98F7A9005A82FE /* TicTacToe-Game */,
 			);
 		};
@@ -134,6 +165,13 @@ AA0000000000000000000001,
 
 /* Begin PBXResourcesBuildPhase section */
 		47E2FEBE2F98F7A9005A82FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA0000000000000000000006 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -150,7 +188,22 @@ AA0000000000000000000001,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AA0000000000000000000004 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AA000000000000000000000A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 47E2FEBF2F98F7A9005A82FE /* TicTacToe-Game */;
+			targetProxy = AA000000000000000000000B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		47E2FEC92F98F7AB005A82FE /* Debug */ = {
@@ -283,7 +336,7 @@ AA0000000000000000000001,
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
@@ -315,7 +368,7 @@ AA0000000000000000000001,
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
@@ -336,6 +389,36 @@ AA0000000000000000000001,
 			};
 			name = Release;
 		};
+		AA0000000000000000000008 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.juanfernandez.TicTacToe-GameTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TicTacToe-Game.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TicTacToe-Game";
+			};
+			name = Debug;
+		};
+		AA0000000000000000000009 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.juanfernandez.TicTacToe-GameTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TicTacToe-Game.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TicTacToe-Game";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -353,6 +436,15 @@ AA0000000000000000000001,
 			buildConfigurations = (
 				47E2FECC2F98F7AB005A82FE /* Debug */,
 				47E2FECD2F98F7AB005A82FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA0000000000000000000007 /* Build configuration list for PBXNativeTarget "TicTacToe-GameTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA0000000000000000000008 /* Debug */,
+				AA0000000000000000000009 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
