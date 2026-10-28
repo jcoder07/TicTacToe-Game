@@ -6,6 +6,7 @@
 //
 
 enum AppMode {
+    case home
     case gameSetup
     case game
 }

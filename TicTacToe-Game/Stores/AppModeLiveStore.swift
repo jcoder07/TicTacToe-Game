@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 final class AppModeLiveStore: ObservableObject {
-    @Published private(set) var appMode: AppMode = .gameSetup
+    @Published private(set) var appMode: AppMode = .home
     
     func goGameMode() {
         appMode = .game
@@ -17,5 +17,9 @@ final class AppModeLiveStore: ObservableObject {
     
     func goSetupMode() {
         appMode = .gameSetup
+    }
+    
+    func goHomeMode() {
+        appMode = .home
     }
 }

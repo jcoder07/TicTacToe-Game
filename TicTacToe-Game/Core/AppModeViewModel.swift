@@ -10,7 +10,7 @@ import Combine
 import Factory
 
 final class AppModeViewModel: ObservableObject {
-    @Published var appMode: AppMode = .gameSetup
+    @Published var appMode: AppMode = .home
     private var cancellables: Set<AnyCancellable> = []
     @Injected(\.appModeStore) var appModeStore
     

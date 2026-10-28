@@ -14,12 +14,12 @@ extension Color {
 extension Color {
     static var main: AppColorTheme {
         .init(
-            accent: .init(.accent),
-            alternateAccent: .init(.alternateAccent),
-            viewBackground: .init(.viewBackground),
-            cellBackground: .init(.cellBackground),
-            text: .init(.text),
-            secondaryText: .init(.secondaryText),
+            accent: .init(.arcadeFuchsia),
+            alternateAccent: .init(.arcadeCyan),
+            viewBackground: .init(.arcadeBackground),
+            cellBackground: .init(.arcadeSurface),
+            text: .init(.arcadeText),
+            secondaryText: .init(.arcadeSecondaryText),
             alternateText: .init(.alternateText),
             accentContrastText: .init(.accentContrastText),
             primaryAction: .init(.primaryAction),
@@ -30,7 +30,7 @@ extension Color {
             info: .init(.info),
             error: .init(.error),
             inProgress: .init(.inProgress),
-            divider: .init(.divider),
+            divider: .init(.arcadeDivider),
             miscellaneous: .init(.miscellaneous))
     }
 }
