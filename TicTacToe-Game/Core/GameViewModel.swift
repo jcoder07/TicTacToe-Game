@@ -28,9 +28,19 @@ final class GameViewModel: ObservableObject {
   @Injected(\.gameStore) var gameStore
   @Injected(\.errorHandlerService) var errorHandlerService
   @Injected(\.analyticsService) var analyticsService
-  private let gameSetupStore = Container.shared.gameSetupStore()
+  private let gameSetupStore: GameSetupLiveStore
   
-  init() {
+  private var pendingTask: Task<Void, Never>?
+  private var roundID = UUID()
+  private let sleep: (Duration) async throws -> Void
+  @Published private(set) var isResultReady = false
+
+  init(
+    setup: GameSetupLiveStore? = nil,
+    sleep: @escaping (Duration) async throws -> Void = { try await Task.sleep(for: $0) }
+  ) {
+    self.sleep = sleep
+    gameSetupStore = setup ?? Container.shared.gameSetupStore()
     playerOne = .init(profile: gameSetupStore.playerOne, symbol: .x)
     playerTwo = .init(profile: gameSetupStore.playerTwo, symbol: .o)
     difficulty = gameSetupStore.selectedDifficulty
@@ -41,7 +51,7 @@ final class GameViewModel: ObservableObject {
   }
   
   var isPlayHumanMoveDisabled: Bool {
-    isBotMovePending || isAnimationInProgress || gameState != .playing
+    currentPlayer.isBot || isBotMovePending || isAnimationInProgress || gameState != .playing
   }
   
   var otherPlayer: Player {
@@ -49,19 +59,23 @@ final class GameViewModel: ObservableObject {
   }
   
   var showWinnerSheet: Bool {
-    gameState.isGameOver
+    isResultReady
   }
   
+  func stopPendingWork() {
+    cancelPendingWork()
+  }
+
   func goSetupMode() {
+    cancelPendingWork()
     appModeStore.goSetupMode()
   }
   
   func resetGame() {
+    cancelPendingWork()
     withAnimation(.spring(duration: GameConstants.cellsAnimation)) {
       resetBoard()
       resetGameState()
-      isBotMovePending = false
-      isAnimationInProgress = false
       error = nil
     }
     
@@ -76,6 +90,7 @@ final class GameViewModel: ObservableObject {
   }
   
   func playHumanMove(row: Int, col: Int) {
+    guard !isPlayHumanMoveDisabled else { return }
     playMove(row: row, col: col)
   }
 }
@@ -98,15 +113,23 @@ private extension GameViewModel {
   }
   
   func playBotMove() {
-    Task {
-      isBotMovePending = true
-      defer { isBotMovePending = false }
-      try? await Task.sleep(for: .seconds(GameConstants.botMoveDelay))
-      let bestMove = gameStore.botBestMove(in: board, difficulty: difficulty)
-      playMove(row: bestMove.row, col: bestMove.col)
+    isBotMovePending = true
+    let id = roundID
+    pendingTask = Task { [weak self] in
+      guard let self else { return }
+      do {
+        try await sleep(.seconds(GameConstants.botMoveDelay))
+        guard !Task.isCancelled, roundID == id,
+              gameState == .playing, currentPlayer.isBot else { return }
+        isBotMovePending = false
+        let bestMove = gameStore.botBestMove(in: board, difficulty: difficulty)
+        playMove(row: bestMove.row, col: bestMove.col)
+      } catch {
+        // Cancellation ends this round's work without reporting a game error.
+      }
     }
   }
-  
+
   func playMove(row: Int, col: Int) {
     do {
       try gameStore.validateMove(row: row, col: col, board: board, gameState: gameState)
@@ -116,12 +139,11 @@ private extension GameViewModel {
       analyticsService.trackMove(player: currentPlayer.isBot ? .bot : .human, position: .init(row: row, col: col))
       
       if let winningCellCordinatesPath = gameStore.checkWin(in: board, for: currentPlayer.cellSymbol) {
-        Task {
-          await animateWinningCellsPath(winningCellCordinatesPath)
-          handleGameEnd(winner: currentPlayer)
-        }
+        handleGameEnd(winner: currentPlayer)
+        presentResult(winningCells: winningCellCordinatesPath)
       } else if gameStore.isBoardFull(board) {
-        triggerTie()
+        handleGameEnd(winner: nil)
+        presentResult(winningCells: [])
       } else {
         switchToNextPlayer()
       }
@@ -130,19 +152,29 @@ private extension GameViewModel {
     }
   }
   
-  func animateWinningCellsPath(_ winningCellCordinatesPath: [CellCoordinate]) async {
+  func presentResult(winningCells path: [CellCoordinate]) {
     isAnimationInProgress = true
-    defer { isAnimationInProgress = false }
-    winningCells = .init()
-    for cellCoordinate in winningCellCordinatesPath {
-      try? await Task.sleep(for: .seconds(GameConstants.winningCellsAnimationDelay))
-      withAnimation(.spring(duration: GameConstants.cellsAnimation)) {
-        winningCells.append(cellCoordinate)
+    let id = roundID
+    pendingTask = Task { [weak self] in
+      guard let self else { return }
+      do {
+        for coordinate in path {
+          try await sleep(.seconds(GameConstants.winningCellsAnimationDelay))
+          guard !Task.isCancelled, roundID == id else { return }
+          withAnimation(.spring(duration: GameConstants.cellsAnimation)) {
+            self.winningCells.append(coordinate)
+          }
+        }
+        try await sleep(.seconds(path.isEmpty ? GameConstants.gameOverDelay : GameConstants.winningCellsAnimationDelay))
+        guard !Task.isCancelled, roundID == id else { return }
+        isAnimationInProgress = false
+        isResultReady = true
+      } catch {
+        // A reset or navigation owns cleanup; an old task must not clear new flags.
       }
     }
-    try? await Task.sleep(for: .seconds(GameConstants.winningCellsAnimationDelay))
   }
-  
+
   func handleGameEnd(winner: Player?) {
     if let winner {
       if winner == playerOne {
@@ -151,7 +183,7 @@ private extension GameViewModel {
         playerTwo.wins += 1
       }
       nextStartingPlayer = winner
-      transitionGameState(to: .won(currentPlayer))
+      transitionGameState(to: .won(winner))
       analyticsService.trackGameEnd(result: winner.isBot ? .botWin : .humanWin)
     } else {
       nextStartingPlayer = otherPlayer
@@ -166,13 +198,15 @@ private extension GameViewModel {
     analyticsService.trackError(error)
   }
   
-  func triggerTie() {
-    Task {
-      try? await Task.sleep(for: .seconds(GameConstants.gameOverDelay))
-      handleGameEnd(winner: nil)
-    }
+  func cancelPendingWork() {
+    roundID = UUID()
+    pendingTask?.cancel()
+    pendingTask = nil
+    isBotMovePending = false
+    isAnimationInProgress = false
+    isResultReady = false
   }
-  
+
   func switchToNextPlayer() {
     currentPlayer = otherPlayer
     if currentPlayer.isBot {

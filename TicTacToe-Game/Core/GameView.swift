@@ -21,6 +21,7 @@ struct GameView: View {
     .infinityFrame()
     .padding()
     .background(Color.appTheme.viewBackground)
+    .onDisappear { viewModel.stopPendingWork() }
     .sheet(isPresented: Binding(
       get: { viewModel.showWinnerSheet },
       set: { _ in }
