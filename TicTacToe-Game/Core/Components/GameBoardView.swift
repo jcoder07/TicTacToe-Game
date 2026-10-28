@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GameBoardView: View {
     let board: Board
-    let winningcells: [CellCoordinate]
+    let winningCells: [CellCoordinate]
     let onCellTap: (Int, Int) -> ()
     
     var body: some View {
@@ -20,7 +20,7 @@ struct GameBoardView: View {
                         let coord = CellCoordinate(row: row, col: col)
                         CellView(
                             state: board[row][col],
-                            isWinningCell: winningcells.contains(coord)
+                            isWinningCell: winningCells.contains(coord)
                         )
                         .button(.press) {
                             withAnimation {
@@ -35,7 +35,7 @@ struct GameBoardView: View {
 }
 
 #Preview {
-    GameBoardView(board: .empty, winningcells: .init()) {_, _ in }
+    GameBoardView(board: .empty, winningCells: .init()) {_, _ in }
         .infinityFrame()
         .padding()
         .background(Color.appTheme.viewBackground)

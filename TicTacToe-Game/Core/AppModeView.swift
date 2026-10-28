@@ -15,12 +15,11 @@ struct AppModeView: View {
             switch viewModel.appMode {
             case .gameSetup:
                 GameSetupView()
-             case .game:
-                Text("Game")
+            case .game:
+                GameView()
             }
         }
         .animation(.easeIn, value: viewModel.appMode)
-
     }
 }
 

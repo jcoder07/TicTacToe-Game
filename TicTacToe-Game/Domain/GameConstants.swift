@@ -18,5 +18,5 @@ struct GameConstants {
     static let boardSpacing: CGFloat = 12
     static let playerSwapAnimationDuration: Double = 0.35
     static let cellFontSize: CGFloat = 40
-    static let winnerSheetheight: CGFloat = 260
+    static let winnerSheetHeight: CGFloat = 260
 }
