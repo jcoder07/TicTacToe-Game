@@ -36,15 +36,17 @@ private extension GameView {
     HStack(spacing: 0) {
       PlayerInGameView(
         player: viewModel.playerOne.profile,
+        cellSymbol: viewModel.playerOne.cellSymbol,
         orientation: .left,
-        isCurrentPlayer: viewModel.currentPlayer.cellSymbol == .x,
+        isCurrentPlayer: viewModel.currentPlayer.cellSymbol == viewModel.playerOne.cellSymbol,
         winsCount: viewModel.playerOne.wins
       )
       Spacer(minLength: 5)
       PlayerInGameView(
         player: viewModel.playerTwo.profile,
+        cellSymbol: viewModel.playerTwo.cellSymbol,
         orientation: .right,
-        isCurrentPlayer: viewModel.currentPlayer.cellSymbol == .o,
+        isCurrentPlayer: viewModel.currentPlayer.cellSymbol == viewModel.playerTwo.cellSymbol,
         winsCount: viewModel.playerTwo.wins
       )
     }

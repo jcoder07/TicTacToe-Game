@@ -14,11 +14,22 @@ struct PlayerProfile: Equatable {
 }
 
 extension PlayerProfile {
+    static let humanAvatars: [ImageResource] = [.avatarArcade, .avatarPixel, .avatarVisorV, .avatarVisorX]
+    static let botAvatar: ImageResource = .avatarIa
+
     static var defaultPlayerOne: Self {
-        .init(name: .playerOne, image: .playerBoy1, type: .human)
+        .init(name: .playerOne, image: humanAvatars[0], type: .human)
     }
-    
+
     static var defaultPlayerTwo: Self {
-        .init(name: .ai, image: .playerBot1, type: .bot)
+        defaultPlayerTwoBot
+    }
+
+    static var defaultPlayerTwoBot: Self {
+        .init(name: .ai, image: botAvatar, type: .bot)
+    }
+
+    static var defaultPlayerTwoHuman: Self {
+        .init(name: .playerTwo, image: humanAvatars[1], type: .human)
     }
 }

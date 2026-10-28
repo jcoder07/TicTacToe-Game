@@ -7,17 +7,24 @@
 
 import SwiftUI
 
-struct SelectionGroupView<Option: Hashable & CustomStringConvertible>: View {
-    
+struct SelectionGroupView<Option: Hashable>: View {
+
     let title: String
     let options: [Option]
     @Binding var selected: Option
-    
+    let label: (Option) -> String
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             titleView
             optionsView
         }
+    }
+}
+
+extension SelectionGroupView where Option: CustomStringConvertible {
+    init(title: String, options: [Option], selected: Binding<Option>) {
+        self.init(title: title, options: options, selected: selected, label: \.description)
     }
 }
 
@@ -40,7 +47,7 @@ private extension SelectionGroupView {
     }
     
     func optionsView(for option: Option) -> some View {
-        Text(option.description)
+        Text(label(option))
             .fontWeight(.medium)
             .foregroundStyle(selected == option ? Color.appTheme.accentContrastText : Color.appTheme.text)
             .padding(8)

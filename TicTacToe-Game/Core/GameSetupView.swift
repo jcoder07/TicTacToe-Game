@@ -8,28 +8,46 @@
 import SwiftUI
 
 struct GameSetupView: View {
-    @AppStorage(UserDefaultKeys.isDarkMode) private var isDarkMode: Bool = true
     @StateObject private var viewModel = GameSetupViewModel()
-    
+
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            VStack(spacing: 20) {
-                logoView
-                welcomeText
-                gameSetupSectionView
-                Spacer()
-                startBattleButton
-            }
-            .infinityFrame()
-            .padding()
-            .background(Color.appTheme.viewBackground)
-            
-            colorSchemeToggle
+        VStack(spacing: 20) {
+            topBar
+            logoView
+            welcomeText
+            gameSetupSectionView
+            Spacer()
+            startBattleButton
         }
+        .infinityFrame()
+        .padding()
+        .background(Color.appTheme.viewBackground)
     }
 }
 
 private extension GameSetupView {
+    var topBar: some View {
+        HStack {
+            backButton
+            Spacer()
+            ColorSchemeToggleView()
+        }
+    }
+
+    var backButton: some View {
+        Image(systemName: "chevron.left")
+            .font(.title3)
+            .fontWeight(.semibold)
+            .foregroundStyle(Color.appTheme.text)
+            .padding()
+            .background(Color.appTheme.cellBackground)
+            .clipShape(Circle())
+            .shadow(.light)
+            .button(.press) {
+                viewModel.goBack()
+            }
+    }
+
     var logoView: some View {
         Image(.logo)
             .renderingMode(.template)
@@ -55,18 +73,35 @@ private extension GameSetupView {
         VStack(spacing: 28) {
             PlayerSelectionView(
                 playerOne: $viewModel.playerOne,
-                playerTwo: $viewModel.playerTwo
+                playerTwo: $viewModel.playerTwo,
+                playerOneColor: viewModel.selectedPlayerOneSymbol.color,
+                playerTwoColor: viewModel.playerTwoSymbol.color
             )
-            SelectionGroupView(
-                title: "Difficulty",
-                options: Difficulty.allCases,
-                selected: $viewModel.selectedDifficulty
+            SymbolSelectionView(
+                title: "Your Symbol",
+                selected: $viewModel.selectedPlayerOneSymbol
             )
+            if viewModel.isVsAI {
+                SelectionGroupView(
+                    title: "Difficulty",
+                    options: Difficulty.allCases,
+                    selected: $viewModel.selectedDifficulty
+                )
+            }
             SelectionGroupView(
                 title: "Who Goes First",
                 options: FirstTurn.allCases,
-                selected: $viewModel.selectedFirstTurn
+                selected: $viewModel.selectedFirstTurn,
+                label: { firstTurnLabel($0) }
             )
+        }
+    }
+
+    func firstTurnLabel(_ firstTurn: FirstTurn) -> String {
+        switch firstTurn {
+        case .you: viewModel.isVsAI ? "You" : "Player 1"
+        case .opponent: viewModel.isVsAI ? "AI" : "Player 2"
+        case .random: "Random"
         }
     }
     
@@ -79,24 +114,6 @@ private extension GameSetupView {
         .button(.press) {
             viewModel.startGame()
         }
-    }
-    
-    var colorSchemeToggle: some View {
-        Image(systemName: isDarkMode ? "sun.max.fill" : "moon.fill")
-            .resizable()
-            .scaledToFit()
-            .frame(width: 20, height: 20)
-            .foregroundStyle(isDarkMode ? Color.appTheme.alternateAccent : Color.appTheme.accent)
-            .padding()
-            .button(.press) {
-                toggleColorScheme()
-            }
-    }
-}
-
-private extension GameSetupView {
-    func toggleColorScheme() {
-        isDarkMode.toggle()
     }
 }
 

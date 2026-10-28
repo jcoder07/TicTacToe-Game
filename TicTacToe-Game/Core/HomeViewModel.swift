@@ -17,12 +17,12 @@ final class HomeViewModel: ObservableObject {
 
 extension HomeViewModel {
     func playVsAI() {
-        gameSetupStore.playerTwo.type = .bot
+        gameSetupStore.playerTwo = .defaultPlayerTwoBot
         appModeStore.goSetupMode()
     }
 
     func playVsHuman() {
-        gameSetupStore.playerTwo.type = .human
+        gameSetupStore.playerTwo = .defaultPlayerTwoHuman
         appModeStore.goSetupMode()
     }
 }

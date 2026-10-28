@@ -12,6 +12,8 @@ struct HomeView: View {
 
     var body: some View {
         VStack(spacing: 24) {
+            topBar
+
             Spacer()
 
             logoView
@@ -30,6 +32,13 @@ struct HomeView: View {
 }
 
 private extension HomeView {
+    var topBar: some View {
+        HStack {
+            Spacer()
+            ColorSchemeToggleView()
+        }
+    }
+
     var logoView: some View {
         Image(.arcadeLogo)
             .resizable()

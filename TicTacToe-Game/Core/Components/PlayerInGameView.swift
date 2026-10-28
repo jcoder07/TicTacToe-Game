@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PlayerInGameView: View {
     let player: PlayerProfile
+    let cellSymbol: CellState
     let orientation: Orientation
     let isCurrentPlayer: Bool
     let winsCount: Int
@@ -32,7 +33,7 @@ struct PlayerInGameView: View {
             .cornerRadius(.cell)
             .overlay(
                 RoundedRectangle(cornerRadius: AppCornerRadius.overall.value)
-                    .stroke(Color.appTheme.accent.opacity(isCurrentPlayer ? 1 : 0), lineWidth: 2)
+                    .stroke(cellSymbol.color.opacity(isCurrentPlayer ? 1 : 0), lineWidth: 2)
             )
         }
         .onAppear {
@@ -52,7 +53,7 @@ private extension PlayerInGameView {
             .background(Color(.systemGray6))
             .overlay(
                 RoundedRectangle(cornerRadius: AppCornerRadius.overall.value)
-                    .stroke(player.type.isBot ? Color.appTheme.alternateAccent : Color.appTheme.accent, lineWidth: 0.2)
+                    .stroke(cellSymbol.color, lineWidth: 0.2)
             )
             .frame(width: 60, height: 60)
     }
@@ -75,9 +76,9 @@ private extension PlayerInGameView {
     }
     
     var currentSymbolView: some View {
-        Image(systemName: orientation == .left ? "xmark" : "circle")
+        Image(systemName: cellSymbol == .x ? "xmark" : "circle")
             .fontWeight(.bold)
-            .foregroundStyle(orientation == .left ? Color.appTheme.accent : Color.appTheme.alternateAccent)
+            .foregroundStyle(cellSymbol.color)
     }
     
     var winsCountView: some View {
@@ -94,17 +95,17 @@ private extension PlayerInGameView {
                 .opacity(0)
             Text(player.name.description)
                 .font(.headline)
-                .foregroundStyle(player.type.isBot ? Color.appTheme.alternateAccent : Color.appTheme.accent)
+                .foregroundStyle(cellSymbol.color)
         }
     }
-    
+
     var arrowIndicatorView: some View {
         Group {
             Image(systemName: "chevron.down")
             Image(systemName: "chevron.down")
         }
         .fontWeight(.semibold)
-        .foregroundStyle(Color.appTheme.accent)
+        .foregroundStyle(cellSymbol.color)
         .opacity(isCurrentPlayer ? 1 : 0)
         .scaleEffect(isCurrentPlayer ? 1.1 : 0.9)
         .animation(isCurrentPlayer ? .easeInOut(duration: 0.6).repeatForever(autoreverses: true) : .default, value: animateArrows)
@@ -135,9 +136,9 @@ extension PlayerInGameView {
 fileprivate struct Preview: View {
     var body: some View {
         HStack(spacing: 0) {
-            PlayerInGameView(player: .defaultPlayerOne, orientation: .left, isCurrentPlayer: true, winsCount: 3)
+            PlayerInGameView(player: .defaultPlayerOne, cellSymbol: .x, orientation: .left, isCurrentPlayer: true, winsCount: 3)
             Spacer(minLength: 5)
-            PlayerInGameView(player: .defaultPlayerTwo, orientation: .right, isCurrentPlayer: false, winsCount: 2)
+            PlayerInGameView(player: .defaultPlayerTwo, cellSymbol: .o, orientation: .right, isCurrentPlayer: false, winsCount: 2)
         }
         .padding()
         .infinityFrame()

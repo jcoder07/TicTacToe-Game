@@ -41,8 +41,10 @@ final class GameViewModel: ObservableObject {
   ) {
     self.sleep = sleep
     gameSetupStore = setup ?? Container.shared.gameSetupStore()
-    playerOne = .init(profile: gameSetupStore.playerOne, symbol: .x)
-    playerTwo = .init(profile: gameSetupStore.playerTwo, symbol: .o)
+    let playerOneSymbol = gameSetupStore.selectedPlayerOneSymbol
+    let playerTwoSymbol: CellState = playerOneSymbol == .x ? .o : .x
+    playerOne = .init(profile: gameSetupStore.playerOne, symbol: playerOneSymbol)
+    playerTwo = .init(profile: gameSetupStore.playerTwo, symbol: playerTwoSymbol)
     difficulty = gameSetupStore.selectedDifficulty
     gameSetup()
     if currentPlayer.isBot {

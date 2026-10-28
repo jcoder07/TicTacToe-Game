@@ -27,16 +27,32 @@ final class GameSetupViewModel: ObservableObject {
     @Published var selectedFirstTurn: FirstTurn = .random {
         didSet { updateFirstTurn(with: selectedFirstTurn) }
     }
-    
+
+    @Published var selectedPlayerOneSymbol: CellState = .x {
+        didSet { updatePlayerOneSymbol(with: selectedPlayerOneSymbol) }
+    }
+
     @Injected(\.appModeStore) var appModeStore
     @Injected(\.gameSetupStore) var gameSetupStore
-    
+
     init() {
         getSetupInfo()
     }
-    
+
+    var isVsAI: Bool {
+        playerTwo.type.isBot
+    }
+
+    var playerTwoSymbol: CellState {
+        selectedPlayerOneSymbol == .x ? .o : .x
+    }
+
     func startGame() {
         appModeStore.goGameMode()
+    }
+
+    func goBack() {
+        appModeStore.goHomeMode()
     }
 }
 
@@ -47,6 +63,7 @@ private extension GameSetupViewModel {
         playerTwo = gameSetupStore.playerTwo
         selectedDifficulty = gameSetupStore.selectedDifficulty
         selectedFirstTurn = gameSetupStore.selectedFirstTurn
+        selectedPlayerOneSymbol = gameSetupStore.selectedPlayerOneSymbol
     }
     
     func updatePlayerOne(with playerOne: PlayerProfile) {
@@ -63,5 +80,9 @@ private extension GameSetupViewModel {
     
     func updateFirstTurn(with firstTurn: FirstTurn) {
         gameSetupStore.selectedFirstTurn = selectedFirstTurn
+    }
+
+    func updatePlayerOneSymbol(with symbol: CellState) {
+        gameSetupStore.selectedPlayerOneSymbol = symbol
     }
 }

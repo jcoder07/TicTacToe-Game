@@ -14,5 +14,6 @@ final class GameSetupLiveStore: ObservableObject {
     @Published var playerTwo: PlayerProfile = .defaultPlayerTwo
     @Published var selectedDifficulty: Difficulty = .medium
     @Published var selectedFirstTurn: FirstTurn = .random
+    @Published var selectedPlayerOneSymbol: CellState = .x
 }
 

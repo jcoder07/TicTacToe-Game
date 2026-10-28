@@ -25,9 +25,9 @@ enum CellState {
         case .empty:
             Color.clear
         case .x:
-            Color.appTheme.accent
-        case .o:
             Color.appTheme.alternateAccent
+        case .o:
+            Color.appTheme.accent
         }
     }
 }
