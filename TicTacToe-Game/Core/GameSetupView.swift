@@ -12,7 +12,11 @@ struct GameSetupView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            logoView
+            if viewModel.isVsAI {
+                Color.clear.frame(height: 56)
+            } else {
+                logoView
+            }
             welcomeText
             gameSetupSectionView
             Spacer()
@@ -53,12 +57,10 @@ private extension GameSetupView {
     }
     
     var logoView: some View {
-        Image(.logo)
-            .renderingMode(.template)
+        Image(.arcadeLogo)
             .resizable()
             .scaledToFit()
-            .frame(maxWidth: .infinity)
-            .foregroundStyle(Color.appTheme.accent)
+            .frame(width: 110, height: 110)
     }
     
     var welcomeText: some View {
