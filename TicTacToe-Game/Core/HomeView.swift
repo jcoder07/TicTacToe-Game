@@ -12,8 +12,6 @@ struct HomeView: View {
 
     var body: some View {
         VStack(spacing: 24) {
-            topBar
-
             Spacer()
 
             logoView
@@ -28,6 +26,11 @@ struct HomeView: View {
         .padding(.vertical, 32)
         .infinityFrame()
         .background(Color.appTheme.viewBackground)
+        .overlay(alignment: .top) {
+            topBar
+                .padding(.horizontal, 20)
+                .padding(.top, 16)
+        }
     }
 }
 

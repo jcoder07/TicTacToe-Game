@@ -12,7 +12,6 @@ struct GameSetupView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            topBar
             logoView
             welcomeText
             gameSetupSectionView
@@ -22,6 +21,11 @@ struct GameSetupView: View {
         .infinityFrame()
         .padding()
         .background(Color.appTheme.viewBackground)
+        .overlay(alignment: .top) {
+            topBar
+                .padding(.horizontal, 20)
+                .padding(.top, 16)
+        }
     }
 }
 
