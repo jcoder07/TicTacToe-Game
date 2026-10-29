@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GameSetupView: View {
     @StateObject private var viewModel = GameSetupViewModel()
-
+    
     var body: some View {
         VStack(spacing: 20) {
             logoView
@@ -37,7 +37,7 @@ private extension GameSetupView {
             ColorSchemeToggleView()
         }
     }
-
+    
     var backButton: some View {
         Image(systemName: "chevron.left")
             .font(.title3)
@@ -51,7 +51,7 @@ private extension GameSetupView {
                 viewModel.goBack()
             }
     }
-
+    
     var logoView: some View {
         Image(.logo)
             .renderingMode(.template)
@@ -100,7 +100,7 @@ private extension GameSetupView {
             )
         }
     }
-
+    
     func firstTurnLabel(_ firstTurn: FirstTurn) -> String {
         switch firstTurn {
         case .you: viewModel.isVsAI ? "You" : "Player 1"
@@ -110,14 +110,11 @@ private extension GameSetupView {
     }
     
     var startBattleButton: some View {
-        HStack(spacing: 5) {
-            Image(systemName: "flame")
-            Text("Start Battle")
-        }
-        .primaryButton()
-        .button(.press) {
-            viewModel.startGame()
-        }
+        Text("Start Battle")
+            .primaryButton()
+            .button(.press) {
+                viewModel.startGame()
+            }
     }
 }
 

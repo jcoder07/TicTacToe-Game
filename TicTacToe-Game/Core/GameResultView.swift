@@ -22,6 +22,10 @@ struct GameResultView: View {
     .padding()
     .infinityFrame()
     .background(Color.appTheme.viewBackground)
+    .overlay(
+      RoundedRectangle(cornerRadius: AppCornerRadius.overall.value, style: .continuous)
+        .stroke(Color.appTheme.secondaryText.opacity(0.5), lineWidth: 1.5)
+    )
     .presentationDetents([.height(GameConstants.winnerSheetHeight)])
     .presentationCornerRadius(AppCornerRadius.overall.value)
     .presentationDragIndicator(.visible)
@@ -63,7 +67,7 @@ private extension GameResultView {
   }
   
   var playAgainButton: some View {
-    Label("Play Again", systemImage: "arrow.counterclockwise.circle.fill")
+    Text("Play Again")
       .primaryButton()
       .button(.press) {
         resetGame()
